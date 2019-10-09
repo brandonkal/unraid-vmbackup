@@ -21,18 +21,13 @@ me=$(basename "$0")
 enabled="0"
 
 # backup location to put vdisks.
-backup_location="/mnt/user/share/backup_folder/"
+backup_location="/mnt/user/share/Backups/VMs/"
 
 # list of domains that will be backed up separated by a new line.
-vms_to_backup="
-vm1
-vm2
-"
+vms_to_backup=$(virsh list --all --name | sed '/MacOS/d')
 
 # list of specific vdisks to be skipped. Use the full path.
 vdisks_to_skip="
-/mnt/user/domains/vm1/vdisk2.img
-/mnt/user/domains/vm1/vdisk3.img
 "
 
 # Should we kill a vm if it can't be shutdown cleanly? default=0.
@@ -46,7 +41,7 @@ number_of_days_to_keep_backups="0"
 
 # How many backups should we keep? 0 means no limit. default=0.
 # WARNING: If VM has multiple vdisks, then they must end in sequential numbers in order to be correctly backed up (i.e. vdisk1.img, vdisk2.img, etc.).
-number_of_backups_to_keep="0"
+number_of_backups_to_keep="10"
 
 # Should we compress backups? This can add a significant amount of time to the backup process.
 # Uses tar.gz for sparse file compatibility. default=0.
@@ -115,10 +110,10 @@ rsync_only="0"
 actually_copy_files="1"
 
 # How many times should we check for a clean vm shutdown? default=20.
-clean_shutdown_checks="20"
+clean_shutdown_checks="60"
 
 # How many seconds should we wait between checks to see if a clean shutdown has been successful. default=30.
-seconds_to_wait="30"
+seconds_to_wait="10"
 
 # Set to 0 to have error log files deleted after the backup has completed. default=1.
 keep_error_log_file="1"
