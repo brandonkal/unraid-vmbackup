@@ -6,3 +6,5 @@ Desktop.ini
 .LSOverride
 ._*
 .vscode
+.script*
+script~
