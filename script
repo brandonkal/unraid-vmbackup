@@ -18,10 +18,10 @@ me=$(basename "$0")
 ############################### script variables start ###############################
 
 # Set to 1 to enable script.
-enabled="0"
+enabled="1"
 
 # backup location to put vdisks.
-backup_location="/mnt/user/share/Backups/VMs/"
+backup_location="/mnt/user/Backups/VMs/"
 
 # list of domains that will be backed up separated by a new line.
 vms_to_backup=$(virsh list --all --name | sed '/MacOS/d')
